@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@react-navigation/core": "^3.7.1",
-    "@react-navigation/native": "^3.7.7"
+    "@react-navigation/native": "https://github.com/CarmeloBeeapp/react-navigation#react-navigation-native-v3.7.7-gitpkg"
   },
   "devDependencies": {
     "@types/react": "^16.9.23",
