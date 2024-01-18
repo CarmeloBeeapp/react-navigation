@@ -14,11 +14,13 @@ export default function (WrappedComponent) {
     }
 
     componentDidMount() {
-      Dimensions.addEventListener('change', this.handleOrientationChange);
+     this.dimensionSubscription = Dimensions.addEventListener('change', this.handleOrientationChange);
     }
 
     componentWillUnmount() {
-      Dimensions.removeEventListener('change', this.handleOrientationChange);
+      if(this.dimensionSubscription) {
+        this.dimensionSubscription.remove();
+      }
     }
 
     handleOrientationChange = ({ window }) => {

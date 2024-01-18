@@ -214,7 +214,7 @@ export default function createNavigationContainer(Component) {
         }
       }
       _statefulContainerCount++;
-      Linking.addEventListener('url', this._handleOpenURL);
+      this.linkingSubscription = Linking.addEventListener('url', this._handleOpenURL);
 
       // Pull out anything that can impact state
       let parsedUrl = null;
@@ -331,7 +331,9 @@ export default function createNavigationContainer(Component) {
 
     componentWillUnmount() {
       this._isMounted = false;
-      Linking.removeEventListener('url', this._handleOpenURL);
+      if(this.linkingSubscription) {
+        this.linkingSubscription.remove();
+      }
       this.subs && this.subs.remove();
 
       if (this._isStateful()) {

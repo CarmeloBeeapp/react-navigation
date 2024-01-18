@@ -91,7 +91,7 @@ export default class DrawerView extends React.PureComponent<Props, State> {
       this.handleDrawerOpen();
     }
 
-    Dimensions.addEventListener('change', this.updateWidth);
+    this.dimensionSubscription = Dimensions.addEventListener('change', this.updateWidth);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -108,7 +108,9 @@ export default class DrawerView extends React.PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
-    Dimensions.removeEventListener('change', this.updateWidth);
+    if(this.dimensionSubscription) {
+      this.dimensionSubscription.remove();
+    }
   }
 
   context!: React.ContextType<typeof ThemeContext>;
